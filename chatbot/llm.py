@@ -36,7 +36,11 @@ class LLMService:
                 ) if system_instruction else None,
             )
 
-            return response.text
+            print(response)
+            print("--------------------------------")
+            print(response.candidates)
+
+            return response.text if response.text else "No text returned."
 
         except Exception as e:
             return f"Error: {e}"

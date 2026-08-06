@@ -24,13 +24,38 @@ MODEL_NAME = "gemini-3.6-flash"
 APP_TITLE = "🏢 Business AI Assistant"
 
 WELCOME_MESSAGE = """
-Hello 👋
+👋 Welcome!
 
-I'm your AI Assistant.
+I'm your Business AI Assistant.
 
-Ask me anything!
+I can answer general questions
+and assist you throughout our conversation.
+
+How can I help you today?
 """
 
 PAGE_ICON = "🤖"
 
 PAGE_LAYOUT = "wide"
+
+# ==============================
+# Sidebar
+# ==============================
+
+SIDEBAR_TITLE = "Business AI"
+
+ABOUT_TEXT = """
+### Business AI Assistant
+
+Phase 1 Demo
+
+Built with:
+
+- Python
+- Streamlit
+- OpenAI
+
+Version: 1.0
+"""
+
+DEFAULT_MODEL = MODEL_NAME
