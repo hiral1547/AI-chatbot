@@ -14,13 +14,8 @@ load_dotenv()
 # OpenAI Configuration
 # ==============================
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-MODEL_NAME = "gpt-4.1-mini"
-
-TEMPERATURE = 0.5
-
-MAX_TOKENS = 500
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+MODEL_NAME = "gemini-3.6-flash"
 
 # ==============================
 # App Configuration

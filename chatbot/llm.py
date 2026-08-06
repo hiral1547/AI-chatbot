@@ -4,41 +4,39 @@ LLM Service
 Handles communication with OpenAI.
 """
 
-from openai import OpenAI
+from google import genai
+from google.genai import types
 
-from config.settings import (
-    OPENAI_API_KEY,
-    MODEL_NAME,
-    TEMPERATURE,
-    MAX_TOKENS,
-)
+from config.settings import GEMINI_API_KEY, MODEL_NAME
 
-# Create OpenAI Client
-client = OpenAI(api_key=OPENAI_API_KEY)
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 
 class LLMService:
-    """
-    Handles all interactions with the language model.
-    """
 
     def generate_response(self, messages):
-        """
-        Send chat messages to the model
-        and return the AI response.
-        """
 
         try:
+            system_instruction = None
+            conversation = []
 
-            response = client.chat.completions.create(
+            for msg in messages:
+                if msg["role"] == "system":
+                    system_instruction = msg["content"]
+                else:
+                    conversation.append(
+                        f'{msg["role"].capitalize()}: {msg["content"]}'
+                    )
+
+            response = client.models.generate_content(
                 model=MODEL_NAME,
-                messages=messages,
-                temperature=TEMPERATURE,
-                max_tokens=MAX_TOKENS,
+                contents="\n\n".join(conversation),
+                config=types.GenerateContentConfig(
+                    system_instruction=system_instruction
+                ) if system_instruction else None,
             )
 
-            return response.choices[0].message.content
+            return response.text
 
         except Exception as e:
-
-            return f"Error : {str(e)}"
+            return f"Error: {e}"
